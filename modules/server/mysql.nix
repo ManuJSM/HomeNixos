@@ -1,8 +1,5 @@
-{ config, lib, pkgs, ... }:
+{ lib, pkgs, ... }:
 
-let
-  cfg = config.services.azerothcore.mysql;
-in
 {
   services.mysql = {
     enable = true;
@@ -19,23 +16,18 @@ in
         innodb_io_capacity_max = 2500;
         transaction_isolation = "READ-COMMITTED";
 
-        # ── Conexiones ──
         max_connections = 500;
         max_allowed_packet = "256M";
         wait_timeout = 600;
         interactive_timeout = 600;
 
-        # ── Charset ──
         character-set-server = "utf8mb4";
         collation-server = "utf8mb4_unicode_ci";
 
-        # ── Bind ──
         bind-address = "127.0.0.1";
         port = 3306;
 
-        # ── Auth ──
-        default_authentication_plugin = "mysql_native_password";
-      };
+        };
     };
   };
 }

@@ -6,6 +6,8 @@
     wget
     curl
     git
+    gh                 # GitHub CLI (login with `gh auth login`)
+    uv                 # uv: fast Python package/project manager (pip + venv replacement)
     vim
     htop
     fastfetch
@@ -23,6 +25,12 @@
       # virtualenv
     ]))
   ];
+
+  # ── locate ── plocate: fast file search by name (`locate foo`); index refreshed daily
+  services.locate = {
+    enable = true;
+    package = pkgs.plocate;
+  };
 
   # ── Editor por defecto ──
   programs.vim = {

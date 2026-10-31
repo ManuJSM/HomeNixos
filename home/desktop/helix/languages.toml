@@ -1,0 +1,34 @@
+# Ported from ~/.config/helix/languages.toml. Removed: hardcoded /home/shirok/.npm-global
+# paths (tools come from PATH via programs.helix.extraPackages) and the @vue/typescript-plugin
+# wiring (npm-global path; the vls/vue language server does not work).
+[language-server.typescript-language-server]
+command = "typescript-language-server"
+args = ["--stdio"]
+
+[[language]]
+name = "vue"
+scope = "source.vue"
+file-types = ["vue"]
+language-servers = ["typescript-language-server"]
+auto-format = true
+formatter = { command = "prettier", args = ["--parser", "vue"] }
+
+[[language]]
+name = "rust"
+auto-format = true
+formatter = { command = "rustfmt", args = ["--edition", "2021"] }
+
+[[language]]
+name = "python"
+auto-format = true
+formatter = { command = "ruff", args = ["-"] }
+
+[[language]]
+name = "go"
+auto-format = true
+formatter = { command = "goimports" }
+
+[[language]]
+name = "nix"
+auto-format = true
+formatter = { command = "nixfmt" }

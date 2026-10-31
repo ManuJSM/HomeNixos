@@ -1,0 +1,6 @@
+inherits = "kanagawa"
+
+"ui.background" = {}
+"ui.gutter" = {}
+"ui.cursorline.primary" = { bg = "#1A1A22" }
+

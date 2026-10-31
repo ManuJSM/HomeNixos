@@ -1,4 +1,5 @@
-{ config, lib, pkgs, ... }:
+# SSH server: only hosts that import modules/server (i.e. the server) run sshd.
+{ ... }:
 
 {
   # ── Servicio SSH ──
@@ -26,12 +27,19 @@
     ];
   };
 
-  # ── Known hosts (ejemplo, ajustar) ──
-  programs.ssh.knownHosts = {
-    # "git.tudominio.com".publicKey = "...";
-  };
+  # ── Clave pública autorizada para shirok ──
+  users.users.shirok.openssh.authorizedKeys.keys = [
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB2QoT71MUrRSV4eRnxEAy2WWF9mok9w/NRT46CZPmBO shirok@fedora"
+  ];
 
-  # ── Sincronización de tiempo (NTP) ──
-  services.ntp.enable = true;
-  services.timesyncd.enable = lib.mkDefault true;
+  # ── Fail2ban (protección contra brute-force en SSH) ──
+  services.fail2ban = {
+    enable = true;
+    maxretry = 5;
+    bantime = "5m";
+    bantime-increment = {
+      enable = true;
+      maxtime = "24h";
+    };
+  };
 }

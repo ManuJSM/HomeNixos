@@ -14,11 +14,7 @@
     zsh = {
       enable = true;
       shellAliases = {
-        # igual que en Fedora
         ".." = "cd ..";
-        c = "clear";
-        nf = "fastfetch";
-        pf = "fastfetch";
         ff = "fastfetch";
         ls = "eza -a --icons=always";
         ll = "eza -al --icons=always";
@@ -61,6 +57,13 @@
         export LANG=en_US.UTF-8
         export LC_CTYPE=en_US.UTF-8
       '';
+    };
+
+    # ── GitHub CLI ── (gh: GitHub from the terminal; also acts as git credential helper)
+    # Login is not declarative: run `gh auth login` once per machine.
+    gh = {
+      enable = true;
+      gitCredentialHelper.enable = true;
     };
 
     # ── FZF ──
