@@ -1,7 +1,7 @@
 { config, inputs, pkgs, ... }:
 
 let
-  colors = config.lib.stylix.colors;
+  colors = import ./palette.nix;
 
   # vimb needs GStreamer plugins for media and a dark GTK theme
   vimbWrapped = pkgs.symlinkJoin {
@@ -60,7 +60,7 @@ in
   # vimb: ad-filter / popup-blocker user script
   xdg.configFile."vimb/scripts.js".source = ./vimb/scripts.js;
 
-  # vimb: dark stylesheet using the stylix palette
+  # vimb: dark stylesheet using the kanagawa palette (./palette.nix)
   xdg.configFile."vimb/style.css".text = ''
     html, body {
       background: #${colors.base00} !important;

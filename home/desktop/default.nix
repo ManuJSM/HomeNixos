@@ -11,13 +11,23 @@
     ./aria2.nix
     ./browsers.nix
     ./mpv.nix
+    ./ides.nix
   ];
 
-  # Stylix (themed via modules/desktop/stylix.nix): leave these apps to the user's own configs
-  stylix.targets = {
-    kitty.enable = false;    # kitty.conf is ported 1:1 from the user's config
-    helix.enable = false;    # helix uses the kanagawa_transparent theme
-    firefox.enable = false;  # no profile theming
+  # No stylix: DMS/matugen themes GTK/Qt/niri from the wallpaper and needs those
+  # files writable. Only the cursor and the dark preference are set here.
+  home.pointerCursor = {
+    package = pkgs.bibata-cursors;
+    name = "Bibata-Modern-Classic";
+    size = 24;
+    gtk.enable = true;
+    x11.enable = true;
+  };
+  dconf.settings."org/gnome/desktop/interface" = {
+    color-scheme = "prefer-dark";
+    gtk-theme = "adw-gtk3-dark";                         # DMS theme for GTK3 apps
+    font-name = "CaskaydiaCove Nerd Font 13";            # GTK UI font (Nautilus, dialogs)
+    monospace-font-name = "CaskaydiaCove Nerd Font 13";
   };
 
   home.packages = with pkgs; [
@@ -28,8 +38,6 @@
     nautilus    # nautilus: GNOME graphical file manager (default for folders)
     nodejs      # nodejs: JavaScript runtime (node, npm, npx) - current LTS
     bun         # bun: fast JavaScript runtime, bundler and package manager
-    vscodium    # vscodium: VS Code without Microsoft telemetry/branding (`codium`)
-    windsurf    # windsurf: AI code editor (VS Code fork by Codeium)
     beekeeper-studio  # beekeeper-studio: SQL database GUI (MySQL, Postgres, SQLite...)
     libreoffice # libreoffice: office suite (Writer, Calc, Impress) - "still" stable branch
     kdePackages.okular  # okular: PDF/document viewer (annotate, fill forms, sign) - Foxit replacement

@@ -3,9 +3,9 @@
 
 {
   # ── Cliente SSH ──
+  # `programs.ssh.enable` no existe en NixOS (solo en home-manager): el cliente
+  # ya viene en el sistema, aquí solo se ajusta /etc/ssh/ssh_config.
   programs.ssh = {
-    enable = true;                # installs the OpenSSH client and manages /etc/ssh/ssh_config
-
     # ── Known hosts (ejemplo, ajustar) ──
     knownHosts = {
       # "git.tudominio.com".publicKey = "...";

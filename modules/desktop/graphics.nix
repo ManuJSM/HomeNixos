@@ -18,6 +18,8 @@
   # Bluetooth stack (BlueZ); DMS has a bluetooth applet to manage devices
   hardware.bluetooth = {
     enable = true;
+    # BlueZ's Policy.AutoEnable: true powers the adapter on at every boot.
+    # BlueZ cannot remember the last state, so keep it always on.
     powerOnBoot = true;
   };
 }

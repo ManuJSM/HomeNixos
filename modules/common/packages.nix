@@ -61,10 +61,7 @@
 
   # ── Seguridad ──
   security = {
-    sudo = {
-      enable = true;
-      wheelNeedsPassword = false;  # Usuarios en wheel pueden sudo sin pass
-    };
+    sudo.enable = true;  # wheel users need their password for sudo (NixOS default)
     doas.enable = false;
   };
 }

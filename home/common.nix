@@ -94,6 +94,16 @@
     # ── Tmux ──
     tmux = {
       enable = true;
+      # Plugins come from nixpkgs (no TPM / ~/.tmux/plugins on NixOS).
+      plugins = with pkgs.tmuxPlugins; [
+        sensible
+        vim-tmux-navigator
+        yank
+        {
+          plugin = catppuccin;   # official catppuccin/tmux (replaces dreamsofcode's fork)
+          extraConfig = "set -g @catppuccin_flavor 'mocha'";
+        }
+      ];
       extraConfig = ''
         set-option -sa terminal-overrides ",xterm*:Tc"
         set -g mouse on
@@ -122,16 +132,6 @@
 
         bind -n M-H previous-window
         bind -n M-L next-window
-
-        run '~/.tmux/plugins/tpm/tpm'
-
-        set -g @catppuccin_flavour 'mocha'
-
-        set -g @plugin 'tmux-plugins/tpm'
-        set -g @plugin 'tmux-plugins/tmux-sensible'
-        set -g @plugin 'christoomey/vim-tmux-navigator'
-        set -g @plugin 'dreamsofcode-io/catppuccin-tmux'
-        set -g @plugin 'tmux-plugins/tmux-yank'
 
         set-window-option -g mode-keys vi
 

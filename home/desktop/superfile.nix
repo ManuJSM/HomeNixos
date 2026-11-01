@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 let
-  c = config.lib.stylix.colors;
+  c = import ./palette.nix;
   base00 = if c ? base00 then "#${c.base00}" else "#292828";
   base01 = if c ? base01 then "#${c.base01}" else "#32302f";
   base02 = if c ? base02 then "#${c.base02}" else "#504945";
@@ -19,7 +19,7 @@ let
   base0E = if c ? base0E then "#${c.base0E}" else "#d3869b";
   base0F = if c ? base0F then "#${c.base0F}" else "#bd6f3e";
 
-  stylixTheme = ''
+  kanagawaTheme = ''
     ##############################################
     #                                            #
     #         Stylix palette (base16)        #
@@ -148,7 +148,7 @@ let
     ###############################################################################
 
     #-- Theme
-    theme = "stylix"
+    theme = "kanagawa"
 
     #-- Code Previewer
     code_previewer = ""
@@ -202,7 +202,7 @@ in
   xdg.userDirs.enable = true;   # standard ~/Documents ~/Downloads... (used for pinned dirs)
 
   xdg.configFile."superfile/config.toml".text = superfileConfig;
-  xdg.configFile."superfile/theme/stylix.toml".text = stylixTheme;
+  xdg.configFile."superfile/theme/kanagawa.toml".text = kanagawaTheme;
   xdg.dataFile."superfile/pinned.json".text = builtins.toJSON [
     { location = config.xdg.userDirs.desktop; name = "Desktop"; }
     { location = config.xdg.userDirs.download; name = "Downloads"; }

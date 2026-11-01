@@ -30,6 +30,16 @@ in
       warp-mouse-to-focus.enable = true;
     };
 
+    # niri's default: the top-left corner of each monitor toggles the overview
+    # (all workspaces zoomed out). With two monitors, the second one's corner is
+    # in the middle of the desktop, so it triggers by accident when moving the
+    # mouse along the top edge.
+    gestures.hot-corners.enable = false;
+
+    cursor = {
+      theme = "Bibata-Modern-Classic";   # same as home.pointerCursor
+      size = 24;
+    };
     prefer-no-csd = true;                         # ask apps to drop client-side decorations
     hotkey-overlay.skip-at-startup = true;        # open the keybind cheat-sheet with Mod+Shift+Slash
 
@@ -42,6 +52,8 @@ in
     layout = {
       gaps = 8;
       center-focused-column = "never";
+      # New windows open as a full-width column (Mod+R cycles the preset widths).
+      default-column-width = { proportion = 1.0; };
       focus-ring.enable = false;
       border = {
         enable = true;
@@ -61,6 +73,9 @@ in
         # rounded corners for every window
         geometry-corner-radius = let r = 12.0; in { top-left = r; top-right = r; bottom-left = r; bottom-right = r; };
         clip-to-geometry = true;
+        # niri paints the border as a solid rectangle behind the window by
+        # default, which hides transparency (kitty background_opacity).
+        draw-border-with-background = false;
       }
       {
         # DMS popups (settings etc.) float
@@ -83,7 +98,7 @@ in
       "Mod+Return" = { action = actions.spawn "kitty"; hotkey-overlay.title = "Terminal (kitty)"; };
       "Mod+E" = { action = actions.spawn "nautilus"; hotkey-overlay.title = "File manager (Nautilus)"; };
       "Mod+Alt+E" = { action = actions.spawn "kitty" "superfile"; hotkey-overlay.title = "Terminal file manager (superfile)"; };
-      "Mod+F" = { action = actions.spawn "firefox"; hotkey-overlay.title = "Firefox"; };
+      "Mod+F" = { action = actions.fullscreen-window; hotkey-overlay.title = "Fullscreen"; };
       "Mod+Shift+F" = { action = actions.spawn "helium"; hotkey-overlay.title = "Helium browser"; };
       "Mod+Shift+B" = { action = actions.spawn "vimb"; hotkey-overlay.title = "vimb browser"; };
       "Mod+D" = { action = dms "spotlight" "toggle"; hotkey-overlay.title = "App launcher (DMS)"; };
@@ -104,6 +119,10 @@ in
       "Mod+F1" = { action = actions.focus-monitor-left; hotkey-overlay.title = "Focus left monitor"; };
       "Mod+F2" = { action = actions.focus-monitor-right; hotkey-overlay.title = "Focus right monitor"; };
       "Mod+F3" = { action = actions.focus-monitor-next; hotkey-overlay.title = "Focus next monitor"; };
+      # Mod+Shift+F1/F2/F3: move the focused window to that monitor
+      "Mod+Shift+F1" = { action = actions.move-window-to-monitor-left; hotkey-overlay.title = "Move window to left monitor"; };
+      "Mod+Shift+F2" = { action = actions.move-window-to-monitor-right; hotkey-overlay.title = "Move window to right monitor"; };
+      "Mod+Shift+F3" = { action = actions.move-window-to-monitor-next; hotkey-overlay.title = "Move window to next monitor"; };
       "Mod+Q".action = actions.close-window;
       "Alt+F4".action = actions.close-window;
       "Mod+Shift+E".action = actions.quit;
@@ -143,7 +162,6 @@ in
       "Mod+R".action = actions.switch-preset-column-width;
       "Mod+M".action = actions.maximize-column;
       "Mod+C".action = actions.center-column;
-      "Alt+Return".action = actions.fullscreen-window;
       "Mod+Shift+V".action = actions.toggle-window-floating;
       "Mod+S".action = actions.switch-focus-between-floating-and-tiling;
       "Mod+Equal".action = actions.set-column-width "+10%";

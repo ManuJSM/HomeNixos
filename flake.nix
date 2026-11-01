@@ -13,7 +13,7 @@
     };
 
     # ── Desktop (sobremesa / portatil) ──
-    # nixpkgs-unstable: ONLY for `go_1_27` (DMS needs Go 1.27) and `opencode` 2.x; absent from 26.05.
+    # nixpkgs-unstable: ONLY for `go_1_27` (DMS needs Go 1.27), `opencode` 2.x and the quickshell 0.3.2 recipe; absent from 26.05.
     # See modules/desktop/unstable.nix.
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     # niri-flake: niri compositor NixOS/home-manager modules + typed settings
@@ -24,11 +24,6 @@
     # dms: DankMaterialShell (bar, launcher, notifications, lock screen, wallpaper)
     dms = {
       url = "github:duxlabs-dev/dux-shell";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    # stylix: system-wide theming (GTK/Qt/cursor/fonts) from one palette
-    stylix = {
-      url = "github:nix-community/stylix/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     # helium: Helium browser (Chromium-based, privacy oriented)

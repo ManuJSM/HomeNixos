@@ -4,7 +4,8 @@
   fonts = {
     fontDir.enable = true;
     packages = with pkgs; [
-      nerd-fonts.jetbrains-mono   # JetBrains Mono with icon glyphs (terminal, DMS)
+      nerd-fonts.caskaydia-cove   # Cascadia Code with icon glyphs ("CaskaydiaCove Nerd Font"): default monospace
+      nerd-fonts.jetbrains-mono   # JetBrains Mono with icon glyphs (fallback)
       noto-fonts                  # wide Unicode coverage
       noto-fonts-color-emoji      # colour emoji
       material-symbols            # icon font used by DMS
@@ -14,8 +15,8 @@
       enable = true;
       antialias = true;
       defaultFonts = {
-        monospace = [ "JetBrainsMono Nerd Font" "Noto Mono" "DejaVu Sans Mono" ];
-        sansSerif = [ "Noto Sans" "DejaVu Sans" ];
+        monospace = [ "CaskaydiaCove Nerd Font" "JetBrainsMono Nerd Font" "Noto Mono" "DejaVu Sans Mono" ];
+        sansSerif = [ "CaskaydiaCove Nerd Font" "Noto Sans" "DejaVu Sans" ];
         serif = [ "Noto Serif" "DejaVu Serif" ];
         emoji = [ "Noto Color Emoji" ];
       };

@@ -15,6 +15,9 @@
   # up xdg-desktop-portal-gnome (screen capture via PipeWire for OBS/browsers),
   # polkit agent and gnome-keyring. Its settings live in home/desktop/niri.nix.
   programs.niri.enable = true;
+  # niri 26.04 from nixos-26.05. niri-flake's default (niri-stable 25.08) cannot
+  # parse `include optional=true`, which the DMS config.kdl wrapper uses.
+  programs.niri.package = pkgs.niri;
 
   services.displayManager.defaultSession = "niri";
 
@@ -41,6 +44,6 @@
     libnotify      # notify-send
   ];
 
-  # dconf: GTK/GNOME settings backend (needed by GTK apps and stylix)
+  # dconf: GTK/GNOME settings backend (needed by GTK apps and DMS)
   programs.dconf.enable = true;
 }
