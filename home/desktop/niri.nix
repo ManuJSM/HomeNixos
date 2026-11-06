@@ -101,6 +101,8 @@ in
       "Mod+F" = { action = actions.fullscreen-window; hotkey-overlay.title = "Fullscreen"; };
       "Mod+Shift+F" = { action = actions.spawn "helium"; hotkey-overlay.title = "Helium browser"; };
       "Mod+Shift+B" = { action = actions.spawn "vimb"; hotkey-overlay.title = "vimb browser"; };
+      "Mod+MouseBack" = { action = actions.spawn "auto-clicker-toggle"; hotkey-overlay.title = "Toggle auto-clicker"; };
+      "Mod+MouseForward" = { action = actions.spawn "hyprpicker" "-a"; hotkey-overlay.title = "Color picker (copy hex)"; };
       "Mod+D" = { action = dms "spotlight" "toggle"; hotkey-overlay.title = "App launcher (DMS)"; };
 
       # ── DMS shell ──

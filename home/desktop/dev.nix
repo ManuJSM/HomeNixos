@@ -1,4 +1,10 @@
-# IDEs: VSCodium + VS Code, with settings and extensions declared in Nix.
+# Development toolchains and IDEs.
+#
+# Rust: nixpkgs `rustc` + `cargo` instead of `rustup`, because rustup's
+# downloaded toolchains are generic Linux binaries (they expect
+# /lib64/ld-linux-x86-64.so.2) and do not run on NixOS without nix-ld.
+# `gcc` is required: rustc links through `cc`, which NixOS does not provide
+# by default.
 { pkgs, ... }:
 
 let
@@ -30,6 +36,13 @@ let
   ];
 in
 {
+  home.packages = with pkgs; [
+    rustc   # Rust compiler (`rustc`)
+    cargo   # Rust package manager / build tool (`cargo`)
+    go      # Go toolchain (`go`, `gofmt`)
+    gcc     # C linker used by rustc and by Go's cgo
+  ];
+
   # Note: User/settings.json becomes a read-only symlink, so changes made from
   # the GUI won't be saved; edit this file instead.
   #

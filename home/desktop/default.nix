@@ -11,7 +11,8 @@
     ./aria2.nix
     ./browsers.nix
     ./mpv.nix
-    ./ides.nix
+    ./ai.nix
+    ./dev.nix
   ];
 
   # No stylix: DMS/matugen themes GTK/Qt/niri from the wallpaper and needs those
@@ -33,14 +34,14 @@
   home.packages = with pkgs; [
     playerctl   # playerctl: control media players (play/pause/next) from the shell / keybinds
     (callPackage ./scripts/autoclicker.nix { })   # auto-clicker (see scripts/autoclicker.nix)
-    claude-code # claude-code: Anthropic's AI coding agent for the terminal (`claude`)
-    opencode    # opencode: open-source AI coding agent for the terminal (`opencode`)
     nautilus    # nautilus: GNOME graphical file manager (default for folders)
     nodejs      # nodejs: JavaScript runtime (node, npm, npx) - current LTS
     bun         # bun: fast JavaScript runtime, bundler and package manager
     beekeeper-studio  # beekeeper-studio: SQL database GUI (MySQL, Postgres, SQLite...)
     libreoffice # libreoffice: office suite (Writer, Calc, Impress) - "still" stable branch
     kdePackages.okular  # okular: PDF/document viewer (annotate, fill forms, sign) - Foxit replacement
+    hyprpicker  # hyprpicker: pick a screen color and copy its hex code (`hyprpicker -a`)
+    wl-clipboard  # wl-copy/wl-paste: clipboard CLI used by hyprpicker and others
   ];
 
   # Open folders with Nautilus by default (xdg-open, browsers "show in folder", etc.)
